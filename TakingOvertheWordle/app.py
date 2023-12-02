@@ -28,7 +28,7 @@ gamesPlayed = 0 # add one everytime main function runs
 
 @app.route('/wordle')
 def wordle():
-    guess = str(input("Guess the word:"))
+    guess = request.form.get("guess")
     if guess == winWord:
         winner="you won"
     return render_template('wordle.html', winner=winner)
@@ -39,15 +39,16 @@ if __name__ == '__main__':
     gamesPlayed += 1
     app.run(debug=True)
 
-"""def play():
+def play():
     while(guess != winWord or tries < 6):
         guess = str(input(""))
-        if not top_level_checks(guess, secret_word): break # subject to change
+        #if not top_level_checks(guess, secret_word): break # subject to change
         tries+= 1 
         if guess == winWord:
-            return render_template('winner.html') # subject to change 
+            won = "you won"
+            return render_template('index.html',won=won) # subject to change can y
         else: 
-            get_feedback(guess)"""
+            get_feedback(guess)
 
 # Takes the guessed word, compares to secret word, returns True for valid guess, False or invalid
 def top_level_checks(guess: str, secret_word: str) -> bool:
