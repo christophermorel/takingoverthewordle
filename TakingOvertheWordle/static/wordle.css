@@ -32,4 +32,17 @@ p {
     margin-bottom: 20px;
 }
 
-/* Add your game-specific styling here */
+#word-display {
+    font-size: 1.5em;
+    margin-bottom: 20px;
+}
+
+#guess-input {
+    margin-bottom: 20px;
+}
+
+button {
+    padding: 10px;
+    font-size: 1em;
+    cursor: pointer;
+}
