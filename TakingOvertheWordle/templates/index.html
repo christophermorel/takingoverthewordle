@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Welcome to Wordle Game</title>
-    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
 </head>
 <body>
     <div class="wordle-container">
@@ -12,7 +12,7 @@
             <h1>Welcome to Wordle Game</h1>
             <form action="/wordle" method="POST">
                 <label for="player-name">Enter Your Name:</label>
-                <input type="text" id="player-name" name="player_name" required>
+                <input type="text" id="player-name" name="player_name">
                 <button type="submit">Play</button>
             </form>
         </div>
