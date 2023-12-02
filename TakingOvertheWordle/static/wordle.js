@@ -7,29 +7,44 @@ document.addEventListener("DOMContentLoaded", function () {
     let remainingAttempts = 6;
 
     // Display placeholders for the word
-    const displayWord = Array.from({ length: randomWord.length }, () => "_").join(" ");
-    wordDisplay.textContent = displayWord;
+    const displayWord = Array.from({ length: randomWord.length }, () => "_");
+    wordDisplay.innerHTML = displayWord.join(" ");
 
     // Function to handle the player's guess
     window.submitGuess = function () {
         const guessInput = document.getElementById("guess");
         const guess = guessInput.value.toLowerCase();
 
-        if (guess.length === 5) {
+        if (guess.length > 0) {
+            let correctLetters = 0;
+
             // Check if the guess matches the word
-            if (guess === randomWord) {
-                resultDisplay.textContent = "Congratulations! You guessed the word!";
+            for (let i = 0; i < randomWord.length; i++) {
+                if (i < guess.length && guess[i] === randomWord[i]) {
+                    correctLetters++;
+                    displayWord[i] = `<span class="correct">${randomWord[i]}</span>`;
+                } else {
+                    displayWord[i] = "_";
+                }
+            }
+
+            // Update the displayed word
+            wordDisplay.innerHTML = displayWord.join(" ");
+
+            // Check if the player guessed the entire word
+            if (correctLetters === randomWord.length) {
+                resultDisplay.innerHTML = "Congratulations! You guessed the word!";
             } else {
-                resultDisplay.textContent = `Incorrect guess. ${remainingAttempts} attempts remaining.`;
+                resultDisplay.innerHTML = `Incorrect guess. ${remainingAttempts} attempts remaining.`;
                 remainingAttempts--;
 
                 if (remainingAttempts === 0) {
-                    resultDisplay.textContent = `Sorry, you've run out of attempts. The correct word was ${randomWord}.`;
+                    resultDisplay.innerHTML = `Sorry, you've run out of attempts. The correct word was ${randomWord}.`;
                     guessInput.disabled = true;
                 }
             }
         } else {
-            resultDisplay.textContent = "Please enter a five-letter word.";
+            resultDisplay.innerHTML = "Please enter a word.";
         }
 
         guessInput.value = ""; // Clear the input field

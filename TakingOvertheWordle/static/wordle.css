@@ -46,3 +46,9 @@ button {
     font-size: 1em;
     cursor: pointer;
 }
+
+.correct {
+    color: green;  /* You can choose any color you prefer */
+    font-weight: bold;
+}
+
