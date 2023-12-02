@@ -3,13 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome to Wordle Game</title>
+    <title>Taking Over the Wordle</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
 </head>
 <body>
     <div class="wordle-container">
         <div class="title-screen">
-            <h1>Welcome to Wordle Game</h1>
+            <h1>Taking Over the Wordle</h1>
             <form action="/wordle" method="POST">
                 <label for="player-name">Enter Your Name:</label>
                 <input type="text" id="player-name" name="player_name">

@@ -37,7 +37,6 @@ def top_level_checks(guess: str, secret_word: str) -> bool:
 def get_feedback(guess: str, secret_word: str) -> str:
     guess = guess.lower()
     secret_word = secret_word.lower()
-    word = secret_word
 
     # if the letter is in the right spot, make it uppercase
     for i in range(len(guess)):
@@ -61,3 +60,4 @@ def get_feedback(guess: str, secret_word: str) -> str:
 def score():
     # score to equal tries it took to win over total games played 
     score = tries/gamesPlayed
+    
