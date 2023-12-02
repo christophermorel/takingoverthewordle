@@ -7,6 +7,7 @@ app = Flask(__name__)
 
 # Home route - Renders the title screen or handles form submission
 @app.route('/', methods=['GET', 'POST'])
+
 def home():
     if request.method == 'POST':
         player_name = request.form.get('player_name', 'Guest')
@@ -17,7 +18,7 @@ def home():
 @app.route('/wordle', methods=['POST'])
 def wordle():
     player_name = request.form.get('player_name', 'Guest')
-    return render_template('play.html', player_name=player_name)
+    return render_template('wordle.html', player_name=player_name)
 
 if __name__ == '__main__':
     app.run(debug=True)
@@ -86,8 +87,9 @@ score = 0
 def score():
     # score to equal tries it took to win over total games played 
     score = tries/gamesPlayed
+    return score()
     
-def cpu():
+# LETS GOOOOO def cpu():
     """ chatgpt code
     def filter_words(word_list, guessed_word, correct_positions, correct_letters):
     filtered_list = []
