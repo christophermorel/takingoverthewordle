@@ -7,7 +7,9 @@ app = Flask(__name__)
 
 @app.route('/')
 def home():
-    
+    if request.method == 'POST':
+        player_name = request.form.get('player_name', 'Guest')
+        return render_template('wordle.html', player_name=player_name)
     return render_template('index.html')
 
 word = "hello"
@@ -22,7 +24,18 @@ def wordle():
     return render_template('wordle.html', winner=winner)
 
 if __name__ == '__main__':
+    # chooses random secret word from list
+    winWord = random.choice(get_word_list())
+    gamesPlayed += 1
     app.run(debug=True)
+
+"""def play():
+    while(guess != winWord or tries < 6):
+        guess = str(input(""))
+        if guess == winWord:
+            return render_template('winner.html') # subject to change 
+        else: 
+            get_feedback(guess)"""
 
 # Takes the guessed word, compares to secret word, returns True for valid guess, False or invalid
 def top_level_checks(guess: str, secret_word: str) -> bool:
@@ -35,6 +48,8 @@ def top_level_checks(guess: str, secret_word: str) -> bool:
 # get_feedback("LEVER", "LOWER") --> "L--ER"
 # get_feedback("MOMMY", "MADAM") --> "M-m--"
 def get_feedback(guess: str, secret_word: str) -> str:
+    # Check for valid/invalid guesses before getting feedback
+    top_level_checks(guess, secret_word)
     guess = guess.lower()
     secret_word = secret_word.lower()
 
