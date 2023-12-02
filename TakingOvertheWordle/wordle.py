@@ -7,12 +7,11 @@ app = Flask(__name__)
 
 @app.route('/')
 def home():
-    
     return render_template('index.html')
 
 word = "hello"
 tries = 0 
-gamesPlayed = 0 # add one everytime main function runs 
+gamesPlayed = 0 # add one whenever main function runs 
 
 @app.route('/wordle')
 def wordle():

@@ -3,13 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wordle Game</title>
-    <link rel="stylesheet" href="wordle.css">
+    <title>Welcome to Wordle Game</title>
+    <link rel="stylesheet" href="index.css">
 </head>
 <body>
     <div class="wordle-container">
-        <div class="wordle-word">HELLO</div>
-        <!-- Add other elements as needed -->
+        <div class="title-screen">
+            <h1>Welcome to Wordle Game</h1>
+            <form action="/wordle" method="POST">
+                <label for="player-name">Enter Your Name:</label>
+                <input type="text" id="player-name" name="player_name" required>
+                <button type="submit">Play</button>
+            </form>
+        </div>
     </div>
 </body>
 </html>
