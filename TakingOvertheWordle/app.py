@@ -10,9 +10,10 @@ def home():
     return render_template('index.html')
 
 word = "hello"
+tries = 0 
+
 @app.route('/wordle')
 def wordle():
-    tries = 0 
     guess = str(input(""))
     if guess == word:
         winner="you won"
@@ -36,7 +37,7 @@ def get_feedback(guess: str, secret_word: str) -> str:
     secret_word = secret_word.lower()
     word = secret_word
 
-    # if the letter is in the right spot 
+    # if the letter is in the right spot, make it uppercase
     for i in range(len(guess)):
         if guess[i] == secret_word[i]:
             guess = guess[0: i] + guess[i].upper() + guess[i+1:]
@@ -57,8 +58,6 @@ def get_feedback(guess: str, secret_word: str) -> str:
 
 def score():
     # score to equal tries it took to win over total games played 
-    tries = user tries when won 
     
-    games played = total games played 
 
     score = tries/games 
