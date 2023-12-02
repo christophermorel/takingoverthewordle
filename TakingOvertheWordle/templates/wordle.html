@@ -12,7 +12,23 @@
             <h2>Welcome, {{ player_name }}!</h2>
             <p>Guess the word:</p>
             <!-- Add your game content here -->
+            <div id="word-display">
+                <!-- Display the word placeholders here -->
+            </div>
+            <div id="guess-input">
+                <!-- Add an input field for the player's guess -->
+                <input type="text" id="guess" placeholder="Enter your guess">
+                <button onclick="submitGuess()">Submit</button>
+            </div>
         </div>
     </div>
+
+    <!-- Add your game-specific scripts here -->
+
+    <script>
+        function submitGuess() {
+            // Add logic to handle the player's guess
+        }
+    </script>
 </body>
 </html>
