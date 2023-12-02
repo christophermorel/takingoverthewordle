@@ -28,7 +28,7 @@ gamesPlayed = 0 # add one everytime main function runs
 
 @app.route('/wordle')
 def wordle():
-    guess = str(input(""))
+    guess = str(input("Guess the word:"))
     if guess == winWord:
         winner="you won"
     return render_template('wordle.html', winner=winner)
