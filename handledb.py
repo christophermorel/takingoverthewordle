@@ -1,7 +1,8 @@
 import sqlite3
 import time
+from app import player_name
 
-def create_user(username):
+def create_user(player_name):
     conn = sqlite3.connect('wordle_database.db')
     cursor = conn.cursor()
 

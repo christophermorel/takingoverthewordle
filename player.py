@@ -1,5 +1,6 @@
 import random
 from wordle_wordlist import get_word_list
+from app import get_winWord
 
 def player_guess():
     guess = str(input("guess"))
@@ -32,23 +33,11 @@ def get_feedback(winWord, guess):
                 guess = guess[: i] + "-" + guess[i+1:]
     return guess
 
-
-    # feedback = ""
-
-    # for i in range(len(winWord)):
-    #     if guess[i] == winWord[i]:
-    #         feedback += "1"
-    #     elif guess[i] in winWord:
-    #         feedback += "2"
-    #     else:
-    #         feedback += "0"
-    # return feedback
-
 def process_feedback(possible_words, guess, feedback):
     return [word for word in possible_words if get_feedback(word, guess) == feedback]
 
 def player_wordle():
-    winWord = random.choice(get_word_list())
+    winWord = get_winWord()
     max_tries = 5
     tries = 0
 

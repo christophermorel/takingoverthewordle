@@ -1,16 +1,10 @@
 import random
-import requests
+from app import get_winWord
 from wordle_wordlist import get_word_list
 
 # Returns random word from possible_words list
 def cpu_guess(possible_words):
     return random.choice(possible_words)
-
-# Function to get a random word from the Flask app
-def get_winWord():
-    response = requests.get('http://127.0.0.1:5000/get_winWord')
-    data = response.json()
-    return data['word']
 
 # Returns a number, in string form, fron get_feedback()
 def match_feedback(word, guess, feedback):
