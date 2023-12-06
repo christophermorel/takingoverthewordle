@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const randomWord = getRandomWord(wordList);
 
         // Display placeholders for the word
-        const displayWord = Array.from({ length: randomWord.length }, () => "_");
+        let displayWord = Array.from({ length: randomWord.length }, () => "_");
         wordDisplay.innerHTML = displayWord.join(" ");
 
         // Function to handle the player's guess
@@ -34,25 +34,17 @@ document.addEventListener("DOMContentLoaded", function () {
             if (guess.length > 0) {
                 let correctLetters = 0;
 
-                // Check if the guess matches the word
-                for (let i = 0; i < randomWord.length; i++) {
+                // Update the displayed word with correct guesses
+                displayWord = displayWord.map((char, i) => {
                     if (i < guess.length && guess[i] === randomWord[i]) {
                         correctLetters++;
-                        displayWord[i] = `<span class="correct">${randomWord[i]}</span>`;
+                        return `<span class="correct">${randomWord[i]}</span>`;
                     } else if (randomWord.includes(guess[i])) {
-                        // Find the index of the guessed letter in the random word
-                        const indexInRandomWord = randomWord.indexOf(guess[i]);
-
-                        // Check if the guessed letter is at the same position in both words
-                        if (indexInRandomWord !== -1 && indexInRandomWord !== i) {
-                            displayWord[i] = `<span class="partial">${guess[i]}</span>`;
-                        } else {
-                            displayWord[i] = "_";
-                        }
+                        return `<span class="partial">${guess[i]}</span>`;
                     } else {
-                        displayWord[i] = "_";
+                        return char;
                     }
-                }
+                });
 
                 // Update the displayed word
                 wordDisplay.innerHTML = displayWord.join(" ");

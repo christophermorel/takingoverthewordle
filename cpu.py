@@ -118,7 +118,7 @@ def get_feedback(winWord, guess):
             feedback += "0"
     return feedback
 
-def process_feedback(possible_words, guess, feedback)
+def process_feedback(possible_words, guess, feedback):
     return [word for word in possible_words if match_feedback(word, guess) == feedback]
 
 def cpu_wordle():
@@ -128,7 +128,7 @@ def cpu_wordle():
     tries = 0
 
     while tries < max_tries:
-        guess = make_guess(possible_words)
+        guess = cpu_guess(possible_words)
         feedback = get_feedback(winWord)
 
         print(f"Guess #{tries + 1}: {guess} | Feedback: {feedback}")
@@ -140,7 +140,7 @@ def cpu_wordle():
         tries += 1
 
     if feedback != "11111":
-    print(f"GGs, better luck, right word is {winWord}!")
+        print(f"GGs, better luck, right word is {winWord}!")
 
 cpu_wordle()
 """
