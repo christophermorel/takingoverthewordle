@@ -47,7 +47,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         }
                     } else if (randomWord.includes(guess[i]) && randomWord.indexOf(guess[i]) !== i) {
                         // Check if the guessed letter is not in the correct position
-                        if (!partialLettersShown.has(guess[i])) {
+                        if (!partialLettersShown.has(guess[i]) && !correctLettersShown.has(guess[i])) {
                             displayWord[i] = `<span class="partial">${guess[i]}</span>`;
                             partialLettersShown.add(guess[i]);
                         }
@@ -86,4 +86,4 @@ document.addEventListener("DOMContentLoaded", function () {
             guessInput.value = "";
         };
     }
-});
+})
