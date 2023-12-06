@@ -43,9 +43,9 @@ document.addEventListener("DOMContentLoaded", function () {
                     for (let i = 0; i < randomWord.length; i++) {
                         if (i < guess.length && guess[i] === randomWord[i]) {
                             correctLetters++;
-                            if (!correctLettersShown.has(guess[i])) {
+                            if (!correctLettersShown.has(randomWord[i])) {
                                 displayWord[i] = `<span class="correct">${randomWord[i]}</span>`;
-                                correctLettersShown.add(guess[i]);
+                                correctLettersShown.add(randomWord[i]);
                             }
                         } else if (randomWord.includes(guess[i]) && randomWord.indexOf(guess[i]) !== i) {
                             if (!partialLettersShown.has(guess[i]) && !correctLettersShown.has(guess[i])) {
@@ -61,7 +61,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
                     if (correctLetters === randomWord.length) {
                         resultDisplay.innerHTML = "Congratulations! You guessed the word!";
-                        guessHistory.push(`<div class="correct">${randomWord}</div>`); // Add correct guess to history with correct class
+                        guessHistory.push(`<div class="correct">${guess}</div>`); // Display only the user input in the history
                         guessHistoryDisplay.innerHTML = guessHistory.join("");
                         guessInput.disabled = true;
                     } else {
@@ -83,7 +83,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         // Update the displayed word
                         wordDisplay.innerHTML = displayWord.join(" ");
 
-                        const guessHistoryEntry = displayWord.map(char => char.includes('span') ? char : '_').join(" ");
+                        const guessHistoryEntry = guess.split('').map(char => `<span>${char}</span>`).join("");
                         guessHistory.push(`<div>${guessHistoryEntry}</div>`);
                         guessHistoryDisplay.innerHTML = guessHistory.join("");
 
@@ -109,6 +109,10 @@ document.addEventListener("DOMContentLoaded", function () {
                 if (guess.length === 1 && !incorrectLettersShown.has(guess)) {
                     incorrectLettersShown.add(guess);
                 }
+
+                const guessHistoryEntry = guess.split('').map(char => `<span>${char}</span>`).join("");
+                guessHistory.push(`<div>${guessHistoryEntry}</div>`);
+                guessHistoryDisplay.innerHTML = guessHistory.join("");
             }
 
             guessInput.value = "";
