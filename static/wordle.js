@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
     const wordDisplay = document.getElementById("word-display");
     const resultDisplay = document.getElementById("result");
+    const guessHistoryContainer = document.getElementById("guess-history-container");
     const guessHistoryDisplay = document.getElementById("guess-history");
     const guessInput = document.getElementById("guess");
     let remainingAttempts = 6;
@@ -59,11 +60,12 @@ document.addEventListener("DOMContentLoaded", function () {
                         resultDisplay.innerHTML = `Sorry, you've run out of attempts. The correct word was ${randomWord}.`;
                         guessInput.disabled = true;
                     }
-                }
 
-                // Add the current guess to the guess history
-                guessHistory.push(`<div>${guess}: ${displayWord.join(" ")}</div>`);
-                guessHistoryDisplay.innerHTML = guessHistory.join("");
+                    // Add only placeholders, correct, and partial guesses to the guess history
+                    const guessHistoryEntry = displayWord.map(char => char.includes('span') ? char : '_').join(" ");
+                    guessHistory.push(`<div>${guessHistoryEntry}</div>`);
+                    guessHistoryDisplay.innerHTML = guessHistory.join("");
+                }
             } else {
                 resultDisplay.innerHTML = "Please enter a word.";
             }
