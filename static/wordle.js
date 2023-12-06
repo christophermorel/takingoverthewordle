@@ -7,6 +7,7 @@ document.addEventListener("DOMContentLoaded", function () {
     let remainingAttempts = 6;
     let wordList;
     let guessHistory = [];
+    let partialLettersShown = new Set();
 
     // Load word list from a file
     fetch('/static/wordlist.txt')
@@ -42,7 +43,10 @@ document.addEventListener("DOMContentLoaded", function () {
                         displayWord[i] = `<span class="correct">${randomWord[i]}</span>`;
                     } else if (randomWord.includes(guess[i]) && randomWord.indexOf(guess[i]) !== i) {
                         // Check if the guessed letter is not in the correct position
-                        displayWord[i] = `<span class="partial">${guess[i]}</span>`;
+                        if (!partialLettersShown.has(guess[i])) {
+                            displayWord[i] = `<span class="partial">${guess[i]}</span>`;
+                            partialLettersShown.add(guess[i]);
+                        }
                     }
                 }
 
@@ -66,6 +70,9 @@ document.addEventListener("DOMContentLoaded", function () {
                     const guessHistoryEntry = displayWord.map(char => char.includes('span') ? char : '_').join(" ");
                     guessHistory.push(`<div>${guessHistoryEntry}</div>`);
                     guessHistoryDisplay.innerHTML = guessHistory.join("");
+
+                    // Reset the set of partial letters shown for the next guess
+                    partialLettersShown.clear();
                 }
             } else {
                 resultDisplay.innerHTML = "Please enter a word.";
