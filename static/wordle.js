@@ -50,6 +50,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 // Check if the player guessed the entire word
                 if (correctLetters === randomWord.length) {
                     resultDisplay.innerHTML = "Congratulations! You guessed the word!";
+                    guessInput.disabled = true;
                 } else {
                     resultDisplay.innerHTML = `Incorrect guess. ${remainingAttempts} attempts remaining.`;
                     remainingAttempts--;
@@ -63,9 +64,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 resultDisplay.innerHTML = "Please enter a word.";
             }
 
-            guessInput.value = ""; // Clear the input field
+            // Clear the input field
+            guessInput.value = "";
         };
-        console.log("Random Word:", randomWord);
-        console.log("Display Word:", displayWord);
     }
 });
