@@ -6,12 +6,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Load word list from a file
     fetch('/static/wordlist.txt')
-    .then(response => response.text())
-    .then(data => {
-        wordList = data.split('\n').map(word => word.trim()).filter(word => word.length > 0);
-        startGame();
-    })
-    .catch(error => console.error('Error loading word list:', error));
+        .then(response => response.text())
+        .then(data => {
+            wordList = data.split('\n').map(word => word.trim()).filter(word => word.length > 0);
+            startGame();
+        })
+        .catch(error => console.error('Error loading word list:', error));
 
     // Function to get a random word from the list
     function getRandomWord(wordList) {
@@ -40,7 +40,15 @@ document.addEventListener("DOMContentLoaded", function () {
                         correctLetters++;
                         displayWord[i] = `<span class="correct">${randomWord[i]}</span>`;
                     } else if (randomWord.includes(guess[i])) {
-                        displayWord[i] = `<span class="partial">${guess[i]}</span>`;
+                        // Find the index of the guessed letter in the random word
+                        const indexInRandomWord = randomWord.indexOf(guess[i]);
+
+                        // Check if the guessed letter is at the same position in both words
+                        if (indexInRandomWord !== -1 && indexInRandomWord !== i) {
+                            displayWord[i] = `<span class="partial">${guess[i]}</span>`;
+                        } else {
+                            displayWord[i] = "_";
+                        }
                     } else {
                         displayWord[i] = "_";
                     }

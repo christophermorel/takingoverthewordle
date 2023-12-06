@@ -99,9 +99,9 @@ for attempt in range(1, max_guesses + 1):
 """
 import random
 
-def cpu_guess(get_word_list()):
+def cpu_guess(possible_words):
 
-    return random.choice(get_word_list())
+    return random.choice(possible_words)
 
 def match_feedback(word, guess, feedback):
     return feedback == get_feedback(word, guess)
@@ -118,8 +118,24 @@ def get_feedback(winWord, guess):
             feedback += "0"
     return feedback
 
-    def process_feed
+def process_feedback(possible_words, guess, feedback)
+    return [word for word in possible_words if match_feedback(word, guess) == feedback]
 
+def cpu_wordle():
+    winWord = random.choice(get_word_list())
+    possible_words = get_word_list()
+    max_tries = 5
+    tries = 0
 
-winWord = random.choice(get_word_list())
+    while tries < max_tries:
+        guess = make_guess(possible_words)
+        feedback = get_feedback(winWord)
+
+        print(f"Guess #{tries + 1}: {guess} | Feedback: {feedback}")
+
+        if feedback == "11111":
+            print(f"Congrats, the word was {winWord}, W!")
+            break
+        possible_words = process_feedback(possible_words, guess, feedback)
+        tries += 1
 """
