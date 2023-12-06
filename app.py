@@ -1,9 +1,17 @@
+<<<<<<< HEAD
 from flask import Flask, render_template, request
+=======
+>>>>>>> parent of 1b50b2f (ee)
 import random
+from flask import Flask, render_template, request, jsonify
+from wordle_wordlist import get_word_list
+from cpu import cpu_wordle
+
 
 
 app = Flask(__name__)
 
+<<<<<<< HEAD
 # Load word list from a file
 with open('static/wordlist.txt', 'r') as file:
     word_list = [word.strip() for word in file.readlines() if word.strip()]
@@ -64,6 +72,32 @@ def submit_guess():
                            remaining_attempts=remaining_attempts, result=result,
                            correct_letters_shown=correct_letters_shown, partial_letters_shown=partial_letters_shown)
 
+=======
+# Home route - Renders the title screen or handles form submission
+@app.route('/', methods=['GET', 'POST'])
+def home():
+    if request.method == 'POST':
+        player_name = request.form.get('player_name', 'Guest')
+        return render_template('wordle.html', player_name=player_name)
+    return render_template('index.html')
+
+
+# Wordle route - Renders the play screen
+@app.route('/wordle', methods=['POST'])
+def wordle():
+    player_name = request.form.get('player_name', 'Guest')
+    player_guess = request.form.get('guess', '')
+    return render_template('wordle.html', player_name=player_name)
+
+# Route for getting a random word
+@app.route('/get_winWord')
+def get_winWord():
+    winWord = random.choice(get_word_list())
+    return jsonify({'word': winWord})
+>>>>>>> parent of 1b50b2f (ee)
 
 if __name__ == '__main__':
     app.run(debug=True)
+
+
+    

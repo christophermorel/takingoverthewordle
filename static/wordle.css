@@ -1,3 +1,5 @@
+/* wordle.css */
+
 body {
     margin: 0;
     padding: 0;
@@ -25,19 +27,19 @@ h2 {
     font-size: 2em;
     margin-bottom: 20px;
     font-weight: bold;
-    color: #fff;
+    color: #fff;  /* Adjust the color as needed */
 }
 
 p {
     font-size: 1.2em;
     margin-bottom: 20px;
-    color: #ccc;
+    color: #ccc;  /* Adjust the color as needed */
 }
 
 #word-display {
     font-size: 1.5em;
     margin-bottom: 20px;
-    color: #fff;
+    color: #fff;  /* Adjust the color as needed */
 }
 
 #guess-input {
@@ -48,7 +50,7 @@ button {
     padding: 10px;
     font-size: 1em;
     cursor: pointer;
-    background-color: #4CAF50;
+    background-color: #4CAF50; /* Green */
     color: white;
     border: none;
     border-radius: 5px;
@@ -64,11 +66,23 @@ button:hover {
 }
 
 .partial {
-    color: yellow;
+    color: yellow;  /* Add styling for partial matches */
     font-weight: bold;
 }
 
 .incorrect {
-    color: white;
+    color: white;  /* Adjust the color as needed */
     font-weight: bold;
+}
+
+#guess-history-container {
+    margin-top: 20px;
+    padding: 10px; 
+    background-color: #6e6e6e;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+#guess-history {
+    font-size: 7em;
 }
