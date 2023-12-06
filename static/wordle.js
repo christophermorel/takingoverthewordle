@@ -61,7 +61,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
                     if (correctLetters === randomWord.length) {
                         resultDisplay.innerHTML = "Congratulations! You guessed the word!";
-                        guessHistory.push(`<div class="correct">${guess}</div>`); // Display only the user input in the history
+                        guessHistory.push(`<div class="correct">${randomWord}</div>`); // Display only the correct word in the history with correct class
                         guessHistoryDisplay.innerHTML = guessHistory.join("");
                         guessInput.disabled = true;
                     } else {
@@ -77,13 +77,14 @@ document.addEventListener("DOMContentLoaded", function () {
                         for (let i = 0; i < randomWord.length; i++) {
                             if (!correctLettersShown.has(randomWord[i]) && !partialLettersShown.has(randomWord[i])) {
                                 displayWord[i] = `<span class="incorrect">${randomWord[i]}</span>`;
+                                incorrectLettersShown.add(randomWord[i]);
                             }
                         }
 
                         // Update the displayed word
                         wordDisplay.innerHTML = displayWord.join(" ");
 
-                        const guessHistoryEntry = guess.split('').map(char => `<span>${char}</span>`).join("");
+                        const guessHistoryEntry = displayWord.map(char => char.includes('span') ? char : '_').join(" ");
                         guessHistory.push(`<div>${guessHistoryEntry}</div>`);
                         guessHistoryDisplay.innerHTML = guessHistory.join("");
 
@@ -100,6 +101,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 for (let i = 0; i < randomWord.length; i++) {
                     if (!correctLettersShown.has(randomWord[i]) && !partialLettersShown.has(randomWord[i])) {
                         displayWord[i] = `<span class="incorrect">${randomWord[i]}</span>`;
+                        incorrectLettersShown.add(randomWord[i]);
                     }
                 }
 
@@ -110,7 +112,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     incorrectLettersShown.add(guess);
                 }
 
-                const guessHistoryEntry = guess.split('').map(char => `<span>${char}</span>`).join("");
+                const guessHistoryEntry = displayWord.map(char => char.includes('span') ? char : '_').join(" ");
                 guessHistory.push(`<div>${guessHistoryEntry}</div>`);
                 guessHistoryDisplay.innerHTML = guessHistory.join("");
             }

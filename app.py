@@ -19,6 +19,7 @@ def home():
 @app.route('/wordle', methods=['POST'])
 def wordle():
     player_name = request.form.get('player_name', 'Guest')
+    player_guess = request.form.get('guess', '')
     return render_template('wordle.html', player_name=player_name)
 
 # Route for getting a random word
