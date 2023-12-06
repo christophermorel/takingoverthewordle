@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded", function () {
         // Function to handle the player's guess
         window.submitGuess = function () {
             const guessInput = document.getElementById("guess");
-            const guess = guessInput.value.toLowerCase();
+            const guess = guessInput.value.toUpperCase();
 
             console.log("Player Guess:", guess);
 
