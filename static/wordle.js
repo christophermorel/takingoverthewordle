@@ -65,5 +65,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
             guessInput.value = ""; // Clear the input field
         };
+        console.log("Random Word:", randomWord);
+        console.log("Display Word:", displayWord);
     }
 });
