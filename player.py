@@ -3,6 +3,7 @@ from wordle_wordlist import get_word_list
 
 def player_guess():
     guess = str(input("guess"))
+    guess = guess.upper()
     return(guess)
 
 def match_feedback(word, guess, feedback):
@@ -23,25 +24,25 @@ def get_feedback(winWord, guess):
 def process_feedback(possible_words, guess, feedback):
     return [word for word in possible_words if get_feedback(word, guess) == feedback]
 
-def cpu_wordle():
+def player_wordle():
     winWord = random.choice(get_word_list())
-    possible_words = get_word_list()
     max_tries = 5
     tries = 0
 
     while tries < max_tries:
-        guess = cpu_guess(possible_words)
-        feedback = get_feedback(winWord,guess)
+        
+        new_word = str(input(""))
+        new_word = new_word.upper()
+        feedback = get_feedback(winWord,new_word)
 
-        print(f"Guess #{tries + 1}: {guess} | Feedback: {feedback}")
+        print(f"Guess #{tries + 1}: {new_word} | Feedback: {feedback}")
 
         if feedback == "11111":
-            print(f"Congrats, the word was {winWord}, W!")
+            print(f"Congrats, the word was {new_word}, W!")
             break
-        possible_words = process_feedback(possible_words, guess, feedback)
         tries += 1
 
     if feedback != "11111":
         print(f"GGs, better luck, right word is {winWord}!")
 
-cpu_wordle()
+player_wordle()
