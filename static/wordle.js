@@ -26,10 +26,14 @@ document.addEventListener("DOMContentLoaded", function () {
         let displayWord = Array.from({ length: randomWord.length }, () => "_");
         wordDisplay.innerHTML = displayWord.join(" ");
 
+        console.log("Random Word:", randomWord);
+
         // Function to handle the player's guess
         window.submitGuess = function () {
             const guessInput = document.getElementById("guess");
             const guess = guessInput.value.toLowerCase();
+
+            console.log("Player Guess:", guess);
 
             if (guess.length > 0) {
                 let correctLetters = 0;
@@ -43,6 +47,8 @@ document.addEventListener("DOMContentLoaded", function () {
                         displayWord[i] = `<span class="partial">${guess[i]}</span>`;
                     }
                 }
+
+                console.log("Display Word:", displayWord.join(" "));
 
                 // Update the displayed word
                 wordDisplay.innerHTML = displayWord.join(" ");
