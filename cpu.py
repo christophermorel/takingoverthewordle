@@ -1,6 +1,5 @@
 import random
 
-def generate_word_list():
 
 def make_guess(possible_words):
     # Choose a guess that maximizes information gain
@@ -25,8 +24,8 @@ def refine_guesses(possible_words, guess, feedback):
     return [word for word in possible_words if get_feedback(word, guess) == feedback]
 
 def play_wordle():
-    secret_word = random.choice(generate_word_list())
-    possible_words = generate_word_list()
+    secret_word = random.choice(get_word_list())
+    possible_words = get_word_list()
     max_tries = 5
     tries = 0
 
@@ -95,3 +94,32 @@ for attempt in range(1, max_guesses + 1):
 
     if attempt == max_guesses:
         print(f"Sorry, you've reached the maximum number of guesses. The word was {target_word}.")
+
+
+"""
+import random
+
+def cpu_guess(get_word_list()):
+
+    return random.choice(get_word_list())
+
+def match_feedback(word, guess, feedback):
+    return feedback == get_feedback(word, guess)
+
+def get_feedback(winWord, guess):
+    feedback = ""
+
+    for i in range(len(winWord)):
+        if guess[i] == winWord[i]:
+            feedback += "1"
+        elif guess[i] in winWord:
+            feedback += "2"
+        else:
+            feedback += "0"
+    return feedback
+
+    def process_feed
+
+
+winWord = random.choice(get_word_list())
+"""
