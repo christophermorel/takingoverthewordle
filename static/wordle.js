@@ -1,8 +1,11 @@
 document.addEventListener("DOMContentLoaded", function () {
     const wordDisplay = document.getElementById("word-display");
     const resultDisplay = document.getElementById("result");
+    const guessHistoryDisplay = document.getElementById("guess-history");
+    const guessInput = document.getElementById("guess");
     let remainingAttempts = 6;
     let wordList;
+    let guessHistory = [];
 
     // Load word list from a file
     fetch('/static/wordlist.txt')
@@ -13,24 +16,18 @@ document.addEventListener("DOMContentLoaded", function () {
         })
         .catch(error => console.error('Error loading word list:', error));
 
-    // Function to get a random word from the list
     function getRandomWord(wordList) {
         return wordList[Math.floor(Math.random() * wordList.length)];
     }
 
-    // Function to start the game
     function startGame() {
         const randomWord = getRandomWord(wordList);
-
-        // Display placeholders for the word
         let displayWord = Array.from({ length: randomWord.length }, () => "_");
         wordDisplay.innerHTML = displayWord.join(" ");
 
         console.log("Random Word:", randomWord);
 
-        // Function to handle the player's guess
         window.submitGuess = function () {
-            const guessInput = document.getElementById("guess");
             const guess = guessInput.value.toUpperCase();
 
             console.log("Player Guess:", guess);
@@ -38,7 +35,6 @@ document.addEventListener("DOMContentLoaded", function () {
             if (guess.length > 0) {
                 let correctLetters = 0;
 
-                // Update the displayed word with correct guesses
                 for (let i = 0; i < randomWord.length; i++) {
                     if (i < guess.length && guess[i] === randomWord[i]) {
                         correctLetters++;
@@ -50,10 +46,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 console.log("Display Word:", displayWord.join(" "));
 
-                // Update the displayed word
                 wordDisplay.innerHTML = displayWord.join(" ");
 
-                // Check if the player guessed the entire word
                 if (correctLetters === randomWord.length) {
                     resultDisplay.innerHTML = "Congratulations! You guessed the word!";
                     guessInput.disabled = true;
@@ -66,11 +60,14 @@ document.addEventListener("DOMContentLoaded", function () {
                         guessInput.disabled = true;
                     }
                 }
+
+                // Add the current guess to the guess history
+                guessHistory.push(`<div>${guess}: ${displayWord.join(" ")}</div>`);
+                guessHistoryDisplay.innerHTML = guessHistory.join("");
             } else {
                 resultDisplay.innerHTML = "Please enter a word.";
             }
 
-            // Clear the input field
             guessInput.value = "";
         };
     }

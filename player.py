@@ -1,9 +1,9 @@
 import random
 from wordle_wordlist import get_word_list
 
-def cpu_guess(possible_words):
-
-    return random.choice(possible_words)
+def player_guess():
+    guess = str(input("guess"))
+    return(guess)
 
 def match_feedback(word, guess, feedback):
     return feedback == get_feedback(word, guess)

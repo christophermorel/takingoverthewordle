@@ -90,44 +90,4 @@ def score():
     score = tries/gamesPlayed
     return score()
     
-# LETS GOOOOO def cpu():
-    """ chatgpt code
-    def filter_words(word_list, guessed_word, correct_positions, correct_letters):
-    filtered_list = []
-    for word in word_list:
-        if sum(1 for a, b in zip(word, guessed_word) if a == b) == correct_positions and \
-           sum(1 for letter in set(word) if guessed_word.count(letter) == correct_letters):
-            filtered_list.append(word)
-    return filtered_list
-
-def make_guess(filtered_list):
-    return random.choice(filtered_list)
-
-def play_game():
-    word_list = initialize_word_list()
-    
-    # Initial guess
-    guessed_word = 'table'  # Replace this with your own initial guess
-    correct_positions = 2   # Replace this with the correct positions in your initial guess
-    correct_letters = 3     # Replace this with the correct letters in your initial guess
-    
-    while correct_positions < 5:
-        print(f"Guess: {guessed_word}")
-        print(f"Correct Positions: {correct_positions}")
-        print(f"Correct Letters: {correct_letters}")
-        
-        # Filter the word list based on feedback
-        word_list = filter_words(word_list, guessed_word, correct_positions, correct_letters)
-        
-        # Make a new guess
-        guessed_word = make_guess(word_list)
-        
-        # Simulate receiving feedback (replace this with your actual feedback logic)
-        correct_positions = int(input("Enter correct positions: "))
-        correct_letters = int(input("Enter correct letters: "))
-    
-    print(f"The word is: {guessed_word}")
-
-# Example usage:
-play_game()
-    """
+ 
