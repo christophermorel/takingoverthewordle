@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", function () {
     let partialLettersShown = new Set();
 
     // Load word list from a file
-    fetch('/static/wordle.txt')  // Assuming the correct file name is wordle.txt
+    fetch('/static/wordlist.txt')  // Assuming the correct file name is wordle.txt
         .then(response => response.text())
         .then(data => {
             wordList = data.split('\n').map(word => word.trim()).filter(word => word.length > 0);
@@ -60,7 +60,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
                     if (correctLetters === randomWord.length) {
                         resultDisplay.innerHTML = "Congratulations! You guessed the word!";
-                        guessHistory.push(`<div>${randomWord}</div>`); // Add correct guess to history
+                        guessHistory.push(`<div class="correct">${randomWord}</div>`); // Add correct guess to history with correct class
                         guessHistoryDisplay.innerHTML = guessHistory.join("");
                         guessInput.disabled = true;
                     } else {
