@@ -41,7 +41,9 @@ document.addEventListener("DOMContentLoaded", function () {
                         correctLetters++;
                         displayWord[i] = `<span class="correct">${randomWord[i]}</span>`;
                     } else if (randomWord.includes(guess[i])) {
-                        displayWord[i] = `<span class="partial">${guess[i]}</span>`;
+                        // Check if the guessed letter is in the correct position
+                        const correctPosition = randomWord.indexOf(guess[i]) === i;
+                        displayWord[i] = `<span class="${correctPosition ? 'correct' : 'partial'}">${guess[i]}</span>`;
                     }
                 }
 
