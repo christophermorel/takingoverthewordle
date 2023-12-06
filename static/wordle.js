@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", function () {
     let partialLettersShown = new Set();
 
     // Load word list from a file
-    fetch('/static/wordlist.txt')  // Assuming the correct file name is wordle.txt
+    fetch('/static/wordlist.txt')
         .then(response => response.text())
         .then(data => {
             wordList = data.split('\n').map(word => word.trim()).filter(word => word.length > 0);
@@ -73,6 +73,16 @@ document.addEventListener("DOMContentLoaded", function () {
                             guessInput.disabled = true;
                         }
 
+                        // Replace underscores with incorrect letters in the display
+                        for (let i = 0; i < randomWord.length; i++) {
+                            if (!correctLettersShown.has(randomWord[i]) && !partialLettersShown.has(randomWord[i])) {
+                                displayWord[i] = `<span class="incorrect">${randomWord[i]}</span>`;
+                            }
+                        }
+
+                        // Update the displayed word
+                        wordDisplay.innerHTML = displayWord.join(" ");
+
                         const guessHistoryEntry = displayWord.map(char => char.includes('span') ? char : '_').join(" ");
                         guessHistory.push(`<div>${guessHistoryEntry}</div>`);
                         guessHistoryDisplay.innerHTML = guessHistory.join("");
@@ -85,10 +95,19 @@ document.addEventListener("DOMContentLoaded", function () {
                 }
             } else {
                 resultDisplay.innerHTML = "Invalid guess. Please enter a valid word from the word list.";
+
+                // Replace underscores with incorrect letters in the display
+                for (let i = 0; i < randomWord.length; i++) {
+                    if (!correctLettersShown.has(randomWord[i]) && !partialLettersShown.has(randomWord[i])) {
+                        displayWord[i] = `<span class="incorrect">${randomWord[i]}</span>`;
+                    }
+                }
+
+                // Update the displayed word
+                wordDisplay.innerHTML = displayWord.join(" ");
+
                 if (guess.length === 1 && !incorrectLettersShown.has(guess)) {
-                    displayWord[randomWord.indexOf(guess)] = `<span class="incorrect">${guess}</span>`;
                     incorrectLettersShown.add(guess);
-                    wordDisplay.innerHTML = displayWord.join(" ");
                 }
             }
 
