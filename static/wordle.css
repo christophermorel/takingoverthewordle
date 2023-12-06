@@ -72,10 +72,10 @@ button:hover {
 #guess-history-container {
     margin-top: 20px;
     padding: 10px;
-    background-color: #333;
+    background-color: #6e6e6e;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
 #guess-history {
-    font-size: 10em;
+    font-size: 8em;
 }
