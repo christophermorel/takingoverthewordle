@@ -40,10 +40,9 @@ document.addEventListener("DOMContentLoaded", function () {
                     if (i < guess.length && guess[i] === randomWord[i]) {
                         correctLetters++;
                         displayWord[i] = `<span class="correct">${randomWord[i]}</span>`;
-                    } else if (randomWord.includes(guess[i])) {
-                        // Check if the guessed letter is in the correct position
-                        const correctPosition = randomWord.indexOf(guess[i]) === i;
-                        displayWord[i] = `<span class="${correctPosition ? 'correct' : 'partial'}">${guess[i]}</span>`;
+                    } else if (randomWord.includes(guess[i]) && randomWord.indexOf(guess[i]) !== i) {
+                        // Check if the guessed letter is not in the correct position
+                        displayWord[i] = `<span class="partial">${guess[i]}</span>`;
                     }
                 }
 
