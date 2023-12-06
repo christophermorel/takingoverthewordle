@@ -138,4 +138,9 @@ def cpu_wordle():
             break
         possible_words = process_feedback(possible_words, guess, feedback)
         tries += 1
+
+    if feedback != "11111":
+    print(f"GGs, better luck, right word is {winWord}!")
+
+cpu_wordle()
 """
