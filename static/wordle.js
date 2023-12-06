@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", function () {
     let wordList;
 
     // Load word list from a file
-    fetch('wordlist.txt')
+    fetch('/static/wordlist.txt')
         .then(response => response.text())
         .then(data => {
             wordList = data.split('\n').map(word => word.trim()).filter(word => word.length > 0);
