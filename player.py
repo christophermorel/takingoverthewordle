@@ -9,7 +9,7 @@ def player_guess():
 def match_feedback(word, guess, feedback):
     return feedback == get_feedback(word, guess)
 
-def get_feedback(winWord, guess):
+"""def get_feedback(winWord, guess):
     feedback = ""
 
     for i in range(len(winWord)):
@@ -17,6 +17,22 @@ def get_feedback(winWord, guess):
             feedback += "1"
         elif guess[i] in winWord:
             feedback += "2"
+        else:
+            feedback += "0"
+    return feedback"""
+def get_feedback(winWord, guess):
+    feedback = ""
+
+    for i in range(len(winWord)):
+        if guess[i] == winWord[i]:
+            feedback += "1"
+        elif guess[i] in winWord:
+            # Check the positions of the guessed letter in both winWord and guess
+            correct_positions = [pos for pos, char in enumerate(winWord) if char == guess[i]]
+            if i in correct_positions:
+                feedback += "1"  # Guessed letter is in the correct position
+            else:
+                feedback += "2"  # Guessed letter is in the wrong position
         else:
             feedback += "0"
     return feedback
