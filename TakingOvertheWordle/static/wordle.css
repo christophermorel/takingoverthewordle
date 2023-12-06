@@ -25,16 +25,19 @@ h2 {
     font-size: 2em;
     margin-bottom: 20px;
     font-weight: bold;
+    color: #fff;  /* Adjust the color as needed */
 }
 
 p {
     font-size: 1.2em;
     margin-bottom: 20px;
+    color: #ccc;  /* Adjust the color as needed */
 }
 
 #word-display {
     font-size: 1.5em;
     margin-bottom: 20px;
+    color: #fff;  /* Adjust the color as needed */
 }
 
 #guess-input {
@@ -45,10 +48,22 @@ button {
     padding: 10px;
     font-size: 1em;
     cursor: pointer;
+    background-color: #4CAF50; /* Green */
+    color: white;
+    border: none;
+    border-radius: 5px;
+}
+
+button:hover {
+    background-color: #45a049;
 }
 
 .correct {
-    color: green;  /* You can choose any color you prefer */
+    color: green;
     font-weight: bold;
 }
 
+.partial {
+    color: yellow;  /* Add styling for partial matches */
+    font-weight: bold;
+}
