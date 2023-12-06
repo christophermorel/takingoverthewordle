@@ -6,7 +6,7 @@ def create_user(username):
     cursor = conn.cursor()
 
     # Insert a new user into the 'users' table
-    cursor.execute('INSERT INTO users (username) VALUES (?)', (username,))
+    cursor.execute('INSERT INTO users (username) VALUES (?)', (player_name,))
     
     user_id = cursor.lastrowid  # Get the ID of the inserted user
     conn.commit()
