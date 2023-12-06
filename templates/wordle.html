@@ -2,27 +2,41 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Wordle</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='wordle.css') }}">
 </head>
 <body>
     <div class="wordle-container">
         <div class="game-screen">
-            <h2>Welcome, {{ player_name }}!</h2>
+            <h2>Welcome to Wordle!</h2>
             <p>Guess the word:</p>
-            <div id="guess-history-container">
-                <div id="guess-history"></div>
-            </div>
             <div id="word-display"></div>
             <div id="guess-input">
-                <input type="text" id="guess" placeholder="Enter your guess" pattern="[a-zA-Z]" title="Please enter a word" maxlength="5" required>
+                <input type="text" id="guess" placeholder="Enter your guess" pattern="[a-zA-Z]" title="Please enter a word" required maxlength="5">
                 <button onclick="submitGuess()">Submit</button>
             </div>
             <p id="result"></p>
         </div>
     </div>
 
-    <script src="{{ url_for('static', filename='wordle.js') }}"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script>
+        function submitGuess() {
+            const guess = $('#guess').val().toUpperCase();
+            $.ajax({
+                type: 'POST',
+                contentType: 'application/json;charset=UTF-8',
+                data: JSON.stringify({ guess: guess }),
+                url: '/check_guess',
+                success: function (response) {
+                    $('#word-display').html(response.display);
+                    $('#result').html(response.result);
+                },
+                error: function (error) {
+                    console.log('Error:', error);
+                }
+            });
+        }
+    </script>
 </body>
 </html>
