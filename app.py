@@ -1,8 +1,8 @@
-import random
+# import random
 
 from flask import Flask, render_template, request
 from wordle_wordlist import get_word_list
-from cpu.py import cpu_wordle
+# from cpu.py import cpu_wordle
 
 app = Flask(__name__)
 
