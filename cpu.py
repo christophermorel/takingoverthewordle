@@ -119,7 +119,7 @@ def get_feedback(winWord, guess):
     return feedback
 
 def process_feedback(possible_words, guess, feedback):
-    return [word for word in possible_words if match_feedback(word, guess) == feedback]
+    return [word for word in possible_words if match_feedback(word, guess, feedback)]
 
 def cpu_wordle():
     winWord = random.choice(get_word_list())
@@ -129,7 +129,7 @@ def cpu_wordle():
 
     while tries < max_tries:
         guess = cpu_guess(possible_words)
-        feedback = get_feedback(winWord)
+        feedback = get_feedback(winWord,guess)
 
         print(f"Guess #{tries + 1}: {guess} | Feedback: {feedback}")
 

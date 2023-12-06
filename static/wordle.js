@@ -35,16 +35,14 @@ document.addEventListener("DOMContentLoaded", function () {
                 let correctLetters = 0;
 
                 // Update the displayed word with correct guesses
-                displayWord = displayWord.map((char, i) => {
+                for (let i = 0; i < randomWord.length; i++) {
                     if (i < guess.length && guess[i] === randomWord[i]) {
                         correctLetters++;
-                        return `<span class="correct">${randomWord[i]}</span>`;
+                        displayWord[i] = `<span class="correct">${randomWord[i]}</span>`;
                     } else if (randomWord.includes(guess[i])) {
-                        return `<span class="partial">${guess[i]}</span>`;
-                    } else {
-                        return char;
+                        displayWord[i] = `<span class="partial">${guess[i]}</span>`;
                     }
-                });
+                }
 
                 // Update the displayed word
                 wordDisplay.innerHTML = displayWord.join(" ");
