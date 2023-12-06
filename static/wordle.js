@@ -6,12 +6,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Load word list from a file
     fetch('/static/wordlist.txt')
-        .then(response => response.text())
-        .then(data => {
-            wordList = data.split('\n').map(word => word.trim()).filter(word => word.length > 0);
-            startGame();
-        })
-        .catch(error => console.error('Error loading word list:', error));
+    .then(response => response.text())
+    .then(data => {
+        wordList = data.split('\n').map(word => word.trim()).filter(word => word.length > 0);
+        startGame();
+    })
+    .catch(error => console.error('Error loading word list:', error));
 
     // Function to get a random word from the list
     function getRandomWord(wordList) {
