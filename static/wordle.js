@@ -8,6 +8,7 @@ document.addEventListener("DOMContentLoaded", function () {
     let wordList;
     let guessHistory = [];
     let correctLettersShown = new Set();
+    let incorrectLettersShown = new Set();
     let partialLettersShown = new Set();
 
     // Load word list from a file
@@ -84,6 +85,11 @@ document.addEventListener("DOMContentLoaded", function () {
                 }
             } else {
                 resultDisplay.innerHTML = "Invalid guess. Please enter a valid word from the word list.";
+                if (guess.length === 1 && !incorrectLettersShown.has(guess)) {
+                    displayWord[randomWord.indexOf(guess)] = `<span class="incorrect">${guess}</span>`;
+                    incorrectLettersShown.add(guess);
+                    wordDisplay.innerHTML = displayWord.join(" ");
+                }
             }
 
             guessInput.value = "";
