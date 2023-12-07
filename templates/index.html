@@ -17,6 +17,26 @@
                 <button type="submit">Submit</button>
             </form>
         </div>
+
+        <!-- Dynamic Table based on Flask dictionary -->
+        {% if game_results %}
+            <table>
+                <thead>
+                    <tr>
+                        <th>Player Name</th>
+                        <th>Time</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for result in game_results %}
+                        <tr>
+                            <td>{{ result[0] }}</td>
+                            <td>{{ result[1] }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% endif %}
     </div>
 </body>
 </html>
