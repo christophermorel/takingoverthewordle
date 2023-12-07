@@ -1,6 +1,8 @@
-# To be updated
 import random
 from wordle_wordlist import get_word_list
+
+# To delete, temporary for now until cpu is needed, just for the program to run
+secretWord = "RATIO"
 
 # Returns random word from possible_words list
 def cpu_guess(possible_words):
@@ -11,16 +13,16 @@ def match_feedback(word, guess, feedback):
     return feedback == get_feedback(word, guess)
 
 # Returns whether or not letter of each index in guess matches with secret word
-def get_feedback(winWord, guess):
+def get_feedback(secretWord, guess):
     feedback = ""
 
     # Iterates through length of secret word
-    for i in range(len(winWord)):
+    for i in range(len(secretWord)):
         # Returns "1" if letter is in exact spot
-        if guess[i] == winWord[i]:
+        if guess[i] == secretWord[i]:
             feedback += "1"
         # Returns "2" if letter is in wrong spot
-        elif guess[i] in winWord:
+        elif guess[i] in secretWord:
             feedback += "2"
         # Returns "0" if letter not in word
         else:
@@ -32,11 +34,10 @@ def process_feedback(possible_words, guess, feedback):
     return [word for word in possible_words if get_feedback(word, guess) == feedback]
 
 # Runs the cpu when called
-def cpu_wordle(winWord):
+def cpu_wordle(secretWord):
 
     # Chooses random word, forms a list of possible words, and tracks tries
-    #winWord = random.choice(get_word_list()), to delete... in case does not work
-    winWord = get_winWord()
+    #secretWord = random.choice(get_word_list()), to delete... in case does not work
     possible_words = get_word_list()
     max_tries = 5
     tries = 0
@@ -44,17 +45,17 @@ def cpu_wordle(winWord):
     # While cpu still has tries, keep guessing, to change when implementing into front-end (print statements)
     while tries < max_tries:
         guess = cpu_guess(possible_words)
-        feedback = get_feedback(winWord,guess)
+        feedback = get_feedback(secretWord,guess)
 
         print(f"Guess #{tries + 1}: {guess} | Feedback: {feedback}")
 
         if feedback == "11111":
-            print(f"Congrats, the word was {winWord}, W!")
+            print(f"Congrats, the word was {secretWord}, W!")
             break
         possible_words = process_feedback(possible_words, guess, feedback)
         tries += 1
 
     if feedback != "11111":
-        print(f"GGs, better luck, right word is {winWord}!")
+        print(f"GGs, better luck, right word is {secretWord}!")
 
-cpu_wordle()
+cpu_wordle(secretWord)

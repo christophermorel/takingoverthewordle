@@ -1,8 +1,12 @@
 from flask import Flask, render_template, request, redirect, url_for
 import random
 from wordle_wordlist import get_word_list
+# from cpu import cpu_wordle
 
 app = Flask(__name__)
+
+# Randomizes the secret word into secret
+secret = random.choice(get_word_list())
 
 # Initializing variables
 guesses_data = []  # List to store history of guesses
@@ -12,6 +16,7 @@ checks_data = []   # List to store history of checks
 def index():
     if request.method == 'POST':
         name = request.form.get('name')
+        
         return redirect(url_for('wordle', name=name))
     return render_template('index.html')
 
@@ -19,9 +24,6 @@ def index():
 def wordle():
 
     if request.method == 'POST':
-        
-        # Randomizes the secret word into secret
-        secret = random.choice(get_word_list())
 
         name = request.form.get('name')  # Extract the 'name' from the form data
 
@@ -69,7 +71,7 @@ def create_check_data(secret, guess):
                 else:
                     word = word[0:word_i] + word[word_i + 1 :]
             else:
-                guess = guess[:i] + "_" + guess[i + 1 :]
+                guess = guess[:i] + "-" + guess[i + 1 :]
     return guess
 
 if __name__ == '__main__':

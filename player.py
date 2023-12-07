@@ -1,4 +1,4 @@
-# To Delete possibly, Player primary functions were implemented in app.py
+# To Delete ... Player primary functions were implemented in app.py
 
 '''
 import random
