@@ -12,47 +12,54 @@ secret = random.choice(get_word_list())
 # Initializing variables
 guesses_data = []  # List to store history of guesses
 checks_data = []   # List to store history of checks
+start_time = 0
+name = ""
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
-    global start_time
+    global start_time, name
     if request.method == 'POST':
-        global name 
         name = request.form.get('name')
         return redirect(url_for('wordle', name=name))
     return render_template('index.html')
 
 @app.route('/wordle', methods=['GET', 'POST'])
 def wordle():
-    global secret, guesses_data, checks_data  # Make these variables global
-
-
+    global secret, guesses_data, checks_data, start_time, name
+    
     if request.method == 'POST':
-        
-        start_time = time.time()
-
+        # Extract the start_time from the form
+        start_time_str = request.form.get('start_time', '0')
         name = request.form.get('name')
+        
+        # Check if start_time_str is not empty before converting to float
+        if start_time_str:
+            start_time = float(start_time_str)
+        else:
+            start_time = 0
+
+        if start_time == 0:
+            start_time = time.time()
 
         # Extract guesses
-        if request.form.get('guess') != None:
-            guess = (request.form.get('guess'))  # Assuming only one guess is submitted
-            guess = guess.upper()
+        if request.form.get('guess') is not None:
+            guess = request.form.get('guess').upper()  # Assuming only one guess is submitted
 
             # Backend logic to create check data
             checks = create_check_data(secret, guess)
 
             # Append the current guess and checks to history
             guesses_data.append(guess)
-            checks_data.append(checks)
-
+            checks_data.append(checks)                    
             if checks == secret:
-                elapsed_time = (time.time() - start_time)
+                elapsed_time = time.time() - start_time
                 record_game_result(name, elapsed_time)
 
                 # Reset the game
                 secret = random.choice(get_word_list())
                 guesses_data = []
                 checks_data = []
+                start_time = 0
 
                 # Render template to user telling them they have won
                 return render_template('game_over.html', message="Congratulations! You've won!")
@@ -66,9 +73,8 @@ def wordle():
                 checks_data = []   # List to store history of checks
                 start_time = 0
                 return render_template('game_over.html', message=lost_message)
-                
             
-    return render_template('wordle.html', rounds={'guesses': guesses_data, 'checks': checks_data, 'name': name, 'secret': secret})
+    return render_template('wordle.html', rounds={'guesses': guesses_data, 'checks': checks_data, 'name': name, 'secret': secret, 'time': start_time})
 
 def create_check_data(secret, guess):
     guess = guess.lower()
@@ -95,16 +101,3 @@ def create_check_data(secret, guess):
 
 if __name__ == '__main__':
     app.run(debug=True)
-
-
-
-'''
-- Correct letter, correct spot: uppercase letter
-- Correct letter, wrong spot: lowercase letter
-- Letter not in the word: '-'
-For example:
-    - create_check_data("lever", "EATEN") --> "-e-E-"
-    - create_check_data("LEVER", "LOWER") --> "L--ER"
-    - create_check_data("MOMMY", "MADAM") --> "M-m--"
-    - create_check_data("ARGUE", "MOTTO") --> "-----"
-'''

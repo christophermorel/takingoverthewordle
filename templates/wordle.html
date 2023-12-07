@@ -40,6 +40,7 @@
 
         <form action="{{ url_for('wordle') }}" method="post">
             <input type="hidden" id="name" name="name" value="{{ rounds.name }}">
+            <input type="hidden" id="start_time" name="start_time" value="{{ rounds.time }}">
             <label for="guess">Guess:</label>
             <input type="text" id="guess" name="guess" maxlength="5" pattern="[a-zA-Z]{5}" required>
             <button type="submit">Submit Guess</button>
