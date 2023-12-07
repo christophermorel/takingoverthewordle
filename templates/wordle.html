@@ -39,6 +39,7 @@
         {% endif %}
 
         <form action="{{ url_for('wordle') }}" method="post">
+            <input type="hidden" id="name" name="name" value="{{ rounds.name }}">
             <label for="guess">Guess:</label>
             <input type="text" id="guess" name="guess" maxlength="5" pattern="[a-zA-Z]{5}" required>
             <button type="submit">Submit Guess</button>
