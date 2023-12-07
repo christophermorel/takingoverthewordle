@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for
 import random
 from wordle_wordlist import get_word_list
-# from database import record_game_result
+from database import record_game_result
 
 app = Flask(__name__)
 
@@ -37,6 +37,9 @@ def wordle():
             # Append the current guess and checks to history
             guesses_data.append(guess)
             checks_data.append(checks)
+
+            if checks == secret:
+                record_game_result(name, True)
 
     return render_template('wordle.html', rounds={'guesses': guesses_data, 'checks': checks_data, 'name': name, 'secret': secret})
 

@@ -2,7 +2,7 @@
 
 body {
     font-family: 'Arial', sans-serif;
-    background-color: #333;
+    background-color: #202020;
     color: #fff;
     margin: 0;
     padding: 0;
@@ -17,41 +17,45 @@ body {
     background-color: #555;
     padding: 20px;
     border-radius: 10px;
+    max-width: 80%; /* Set a maximum width for the container */
+    margin: 0 auto; /* Center the container */
 }
 
 h1 {
     color: #f8f8f8;
 }
 
-form {
+h2 {
+    color: #f8f8f8;
     margin-top: 20px;
+}
+
+form {
     display: flex;
-    justify-content: center;
-    align-items: center;
+    flex-direction: column; /* Stack the form elements vertically */
+    margin-top: 20px;
 }
 
 label {
     color: #f8f8f8;
-    margin-right: 10px;
+    margin-bottom: 10px;
 }
 
-input {
-    width: 50px;
+input,
+button {
+    width: 100%;
     padding: 10px;
     border: none;
     border-radius: 5px;
     font-size: 24px;
-    background-color: #202020;
-    color: #fff;
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
 }
 
 button {
-    padding: 10px;
     background-color: #4caf50;
     color: #fff;
-    border: none;
-    border-radius: 5px;
     cursor: pointer;
+    margin-top: 10px; /* Add some space between the input and button */
 }
 
 button:hover {
@@ -65,16 +69,15 @@ table {
     background-color: #202020;
 }
 
-th, td {
+td {
     padding: 15px;
     text-align: center;
-    background-color: #555;
     font-size: 30px;
 }
 
 .guess-word span {
     display: inline-block;
-    width: 50px;
+    width: 10%; /* Adjust as needed */
     height: 50px;
     line-height: 50px;
     margin: 2px;
@@ -95,9 +98,4 @@ th, td {
 
 .incorrect {
     color: #f44336;
-}
-
-.check {
-    font-weight: bold;
-    color: #f8f8f8;
 }
