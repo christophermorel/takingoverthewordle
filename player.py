@@ -30,7 +30,7 @@ def get_feedback(winWord, guess):
                 else:
                     word = word[0: word_i] + word[word_i+1:]
             else:
-                guess = guess[: i] + "-" + guess[i+1:]
+                guess = guess[: i] + "_" + guess[i+1:]
     return guess
 
 def process_feedback(possible_words, guess, feedback):

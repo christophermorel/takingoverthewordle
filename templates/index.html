@@ -3,20 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Taking Over the Wordle</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
+    <title>Wordle Game</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
+
     <div class="wordle-container">
-        <div class="title-screen">
-            <h1>Taking Over the Wordle</h1>
-            <form action="/wordle" method="POST">
-                <label for="player-name">Enter Your Name:</label>
-                <input type="text" id="player-name" name="player_name">
-                <button type="submit">Play</button>
+        <div class="game-screen">
+            <h2>Wordle Game</h2>
+            <p>Guess the word to win the game!</p>
+
+            <form method="post" action="/">
+                <label for="user_guess">Enter your guess:</label>
+                <input type="text" id="user_guess" name="user_guess" placeholder="e.g., P Y T H" maxlength="5">
+                <button type="submit">Submit Guess</button>
             </form>
+
+            <div id="word-display" class="word-display"></div>
+            
+            <table>
+                {% for guess in past_guesses %}
+                    <tr>
+                        {% for cell in guess %}
+                            <td class="{{ cell.class }}">{{ cell.letter }}</td>
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+            </table>
+
         </div>
     </div>
+
 </body>
 </html>
