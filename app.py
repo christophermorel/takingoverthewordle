@@ -3,6 +3,7 @@ import random
 from wordle_wordlist import get_word_list
 import sqlite3
 import time
+from cpu import cpu_wordle
 
 app = Flask(__name__)
 
@@ -23,6 +24,16 @@ conn.commit()
 
 # Randomizes the secret word into secret
 secret = random.choice(get_word_list())
+
+
+# Gets the number of tries it took the cpu to guess the secret word
+global cpu_tries
+cpu_tries = cpu_wordle(secret)
+if(cpu_tries == 0):
+    cpu_tries = "Computer did not guess the word!"
+else:
+    cpu_tries = f"Computer got it in {cpu_tries} tries!"
+
 
 # Initializing variables
 guesses_data = []  # List to store history of guesses
@@ -83,12 +94,12 @@ def wordle():
                 start_time = 0
 
                 # Render template to user telling them they have won
-                return render_template('game_over.html', message="Congratulations! You've won!")
+                return render_template('game_over.html', message=(f"Congratulations! You've won! {cpu_tries}"))
 
             elif len(guesses_data) >= 6:
                 elapsed_time = 0
                 # Inform the player that they have lost and provide the correct word
-                lost_message = f"Sorry, {name}! You have run out of guesses. The correct word was {secret}."
+                lost_message = f"Sorry, {name}! You have run out of guesses. The correct word was {secret}. {cpu_tries}"
                 secret = random.choice(get_word_list())
                 guesses_data = []  # List to store history of guesses
                 checks_data = []   # List to store history of checks

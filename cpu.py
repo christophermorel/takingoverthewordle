@@ -1,9 +1,6 @@
 import random
 from wordle_wordlist import get_word_list
 
-# To delete, temporary for now until cpu is needed, just for the program to run
-secretWord = "RATIO"
-
 # Returns random word from possible_words list
 def cpu_guess(possible_words):
     return random.choice(possible_words)
@@ -35,6 +32,7 @@ def process_feedback(possible_words, guess, feedback):
 
 # Runs the cpu when called
 def cpu_wordle(secretWord):
+    # find how to import secret_word from app.py or transfer this logic there 
 
     # Chooses random word, forms a list of possible words, and tracks tries
     #secretWord = random.choice(get_word_list()), to delete... in case does not work
@@ -47,15 +45,11 @@ def cpu_wordle(secretWord):
         guess = cpu_guess(possible_words)
         feedback = get_feedback(secretWord,guess)
 
-        print(f"Guess #{tries + 1}: {guess} | Feedback: {feedback}")
-
         if feedback == "11111":
-            print(f"Congrats, the word was {secretWord}, W!")
-            break
+            return tries
+
         possible_words = process_feedback(possible_words, guess, feedback)
         tries += 1
 
     if feedback != "11111":
-        print(f"GGs, better luck, right word is {secretWord}!")
-
-cpu_wordle(secretWord)
+        return 0

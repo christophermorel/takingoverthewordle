@@ -18,24 +18,26 @@
             </form>
         </div>
 
-        <!-- Dynamic Table based on Flask dictionary -->
+        <!-- Scoreboard -->
         {% if game_results %}
-            <table>
-                <thead>
-                    <tr>
-                        <th>Player Name</th>
-                        <th>Time</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for result in game_results %}
+            <div class="scoreboard">
+                <table>
+                    <thead>
                         <tr>
-                            <td>{{ result[0] }}</td>
-                            <td>{{ result[1] }}</td>
+                            <th class="header-cell">Player Name</th>
+                            <th class="header-cell">Time (sec.)</th>
                         </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        {% for result in game_results %}
+                            <tr>
+                                <td>{{ result[0] }}</td>
+                                <td class="time-cell">{{ result[1]|round(3) }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
         {% endif %}
     </div>
 </body>

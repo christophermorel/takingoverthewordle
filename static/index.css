@@ -10,7 +10,7 @@ body {
 
 .wordle-container {
     display: flex;
-    justify-content: center;
+    flex-direction: column; /* Updated to column */
     align-items: center;
     height: 100vh;
 }
@@ -63,3 +63,43 @@ button {
 button:hover {
     background-color: #45a049;
 }
+
+/* Scoreboard Styles */
+
+.scoreboard {
+    margin-top: 20px;
+}
+
+.scoreboard table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #555;
+}
+
+.scoreboard th, .scoreboard td {
+    padding: 15px;
+    text-align: center;
+    font-size: 18px;
+    color: #fff;
+}
+
+.scoreboard th {
+    background-color: #333;
+}
+
+.scoreboard tr:nth-child(even) {
+    background-color: #444;
+}
+
+.scoreboard tr:nth-child(odd) {
+    background-color: #333;
+}
+
+.scoreboard .header-cell {
+    font-weight: bold;
+}
+
+.scoreboard .time-cell {
+    position: relative;
+}
+
