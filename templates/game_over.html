@@ -11,9 +11,9 @@
     <div class="container">
         <h1>Game Over</h1>
         {% if has_won %}
-            <p class="result-message">Congratulations, {{ rounds.name }}! You've won!</p>
+            <p class="result-message">{{ message }}</p>
         {% else %}
-            <p class="result-message">Sorry, {{ rounds.name }}, you've run out of guesses. Better luck next time!</p>
+            <p class="result-message">{{ message }}</p>
         {% endif %}
         <a href="{{ url_for('index') }}" class="retry-link">Retry</a>
     </div>

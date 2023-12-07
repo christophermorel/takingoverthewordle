@@ -20,10 +20,6 @@ def index():
     if request.method == 'POST':
         global name 
         name = request.form.get('name')
-        
-        if start_time is 0:
-            start_time = time.time()
-
         return redirect(url_for('wordle', name=name))
     return render_template('index.html')
 
@@ -33,8 +29,10 @@ def wordle():
 
 
     if request.method == 'POST':
+        if start_time is 0:
+            start_time = time.time()
 
-        name = request.form.get('name') 
+        name = request.form.get('name')
 
         # Extract guesses
         if request.form.get('guess') != None:
