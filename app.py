@@ -12,7 +12,6 @@ secret = random.choice(get_word_list())
 # Initializing variables
 guesses_data = []  # List to store history of guesses
 checks_data = []   # List to store history of checks
-start_time = 0
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
@@ -29,8 +28,8 @@ def wordle():
 
 
     if request.method == 'POST':
-        if start_time is 0:
-            start_time = time.time()
+        
+        start_time = time.time()
 
         name = request.form.get('name')
 
@@ -47,7 +46,7 @@ def wordle():
             checks_data.append(checks)
 
             if checks == secret:
-                elapsed_time = int(time.time() - start_time)
+                elapsed_time = (time.time() - start_time)
                 record_game_result(name, elapsed_time)
 
                 # Reset the game
