@@ -1,3 +1,6 @@
+# To Delete possibly, Player primary functions were implemented in app.py
+
+'''
 import random
 from wordle_wordlist import get_word_list
 from app import get_winWord
@@ -58,3 +61,4 @@ def player_wordle():
         print(f"GGs, better luck, right word is {winWord}!")
 
 player_wordle()
+'''

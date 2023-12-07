@@ -2,37 +2,21 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wordle Game</title>
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
+    <title>Welcome to Taking Over the Wordle</title>
 </head>
 <body>
-
     <div class="wordle-container">
-        <div class="game-screen">
-            <h2>Wordle Game</h2>
-            <p>Guess the word to win the game!</p>
-
-            <form method="post" action="/">
-                <label for="user_guess">Enter your guess:</label>
-                <input type="text" id="user_guess" name="user_guess" placeholder="e.g., P Y T H" maxlength="5">
-                <button type="submit">Submit Guess</button>
+        <div class="title-screen">
+            <h1>Welcome to Taking Over the Wordle</h1>
+            <form action="{{ url_for('wordle') }}" method="post">
+                <label for="name">Enter your name:</label>
+                <input type="text" id="name" name="name" required>
+                <button type="submit">Submit</button>
             </form>
-
-            <div id="word-display" class="word-display"></div>
-            
-            <table>
-                {% for guess in past_guesses %}
-                    <tr>
-                        {% for cell in guess %}
-                            <td class="{{ cell.class }}">{{ cell.letter }}</td>
-                        {% endfor %}
-                    </tr>
-                {% endfor %}
-            </table>
-
         </div>
     </div>
-
 </body>
 </html>

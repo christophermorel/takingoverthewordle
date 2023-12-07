@@ -1,28 +1,64 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wordle</title>
+    <title>Wordle Minigame</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='wordle.css') }}">
 </head>
-<body>
-    <div class="wordle-container">
-        <div class="game-screen">
-            <h2>Welcome, {{ player_name }}!</h2>
-            <p>Guess the word:</p>
-            <div id="guess-history-container">
-                <div id="guess-history"></div>
-            </div>
-            <div id="word-display"></div>
-            <div id="guess-input">
-                <input type="text" id="guess" placeholder="Enter your guess" pattern="[a-zA-Z]" title="Please enter a word" maxlength="5" required>
-                <button onclick="submitGuess()">Submit</button>
-            </div>
-            <p id="result"></p>
-        </div>
-    </div>
 
-    <script src="{{ url_for('static', filename='wordle.js') }}"></script>
+<body>
+    <h1>Welcome to Wordle Minigame, {{ rounds.name }}</h1>
+
+    <form action="{{ url_for('wordle') }}" method="post">
+        <label for="guess">Make a guess (5 letters):</label>
+        <input type="text" id="guess" name="guess" maxlength="5" pattern="[a-zA-Z]{5}" required>
+        <button type="submit">Submit Guess</button>
+    </form>
+
+    {% if rounds.guesses %}
+        {% if rounds.guesses|length >= 6 %}
+            <h2>You Lose! The correct word is: {{ secret }}</h2>
+        {% else %}
+            <h2>Guess History:</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Round</th>
+                        <th>Guess</th>
+                        <th>Check</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% set counter = 0 %}
+                    {% for round in rounds.guesses %}
+                        <tr>
+                            <td>{{ counter + 1 }}</td>
+                            <td>
+                                {% set guess_word = round %}
+                                {% set check_word = rounds.checks[loop.index0] %}
+                                {% for letter in round %}
+                                    {% if check_word[counter].isupper() %}
+                                        <span class="correct">{{ letter }}</span>
+                                    {% elif check_word[counter].islower() %}
+                                        <span class="partial">{{ letter }}</span>
+                                    {% elif check_word[counter] == '-' %}
+                                        {% set guess_word = rounds.guesses[loop.index0 - 1] %}
+                                        {% set replacement = guess_word[loop.index0] if guess_word else '_' %}
+                                        <span class="incorrect">{{ replacement }}</span>
+                                    {% endif %}
+                                    {% set counter = counter + 1 %}
+                                {% endfor %}
+                            </td>
+                            <td>{{ check_word }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% endif %}
+    {% endif %}
 </body>
+
 </html>

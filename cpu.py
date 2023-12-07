@@ -1,5 +1,5 @@
+# To be updated
 import random
-from app import get_winWord
 from wordle_wordlist import get_word_list
 
 # Returns random word from possible_words list
@@ -32,7 +32,7 @@ def process_feedback(possible_words, guess, feedback):
     return [word for word in possible_words if get_feedback(word, guess) == feedback]
 
 # Runs the cpu when called
-def cpu_wordle():
+def cpu_wordle(winWord):
 
     # Chooses random word, forms a list of possible words, and tracks tries
     #winWord = random.choice(get_word_list()), to delete... in case does not work
