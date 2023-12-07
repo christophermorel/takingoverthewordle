@@ -9,13 +9,7 @@
 </head>
 <body>
     <div class="container">
-        <h1>Welcome to Wordle Minigame, {{ rounds.name }}</h1>
-
-        <form action="{{ url_for('wordle') }}" method="post">
-            <label for="guess">Make a guess (5 letters):</label>
-            <input type="text" id="guess" name="guess" maxlength="5" pattern="[a-zA-Z]{5}" required>
-            <button type="submit">Submit Guess</button>
-        </form>
+        <h1>Welcome to Taking Over the Wordle!, {{ rounds.name }}</h1>
 
         {% if rounds.guesses %}
         <h2>Guess History:</h2>
@@ -38,12 +32,17 @@
                             {% endif %}
                         {% endfor %}
                     </td>
-                    <td class="check">{{ checks }}</td>
                 </tr>
                 {% endfor %}
             </tbody>
         </table>
         {% endif %}
+
+        <form action="{{ url_for('wordle') }}" method="post">
+            <label for="guess">Guess:</label>
+            <input type="text" id="guess" name="guess" maxlength="5" pattern="[a-zA-Z]{5}" required>
+            <button type="submit">Submit Guess</button>
+        </form>
     </div>
 </body>
 </html>

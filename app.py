@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for
 import random
 from wordle_wordlist import get_word_list
-# from cpu import cpu_wordle
+# from database import record_game_result
 
 app = Flask(__name__)
 
@@ -16,7 +16,6 @@ checks_data = []   # List to store history of checks
 def index():
     if request.method == 'POST':
         name = request.form.get('name')
-        
         return redirect(url_for('wordle', name=name))
     return render_template('index.html')
 
