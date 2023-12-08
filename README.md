@@ -1,6 +1,9 @@
 Taking over the wordle. 
 
 To run the flask server, the vscode extensions, Python (Microsoft), SQLite & MySQL Snippets (Rohit Chouhan), and flask-snippet (cstrap) are needed.
+
+0. cd into "takingoverthewordle" or if renamed, the name of the project directory
+
 Windows:
 1. Set up virtual environment by running "python -m venv venv" in the Integrated Terminal
 2. Then execute "venv\Scripts\activate"
@@ -10,10 +13,9 @@ MacOs/Linux:
 2. Then execute "source venv/bin/activate"
 
 3. Install flask into environment by running "pip install flask"
-4. cd into "takingoverthewordle" or if renamed, the name of the project directory
-5. Run "python3 app.py" and open the Flask development server
+4. Run "python3 app.py" and open the Flask development server
 
-6. To kill the development server press Control+C, and to deactive the virtual environment type "deactivate" into the Integrated Terminal
+5. To kill the development server press Control+C, and to deactive the virtual environment type "deactivate" into the Integrated Terminal
 
 The simplest definition of our project is a recreation of The New York Times’ popular online game “Wordle” with a few twists. Those twists being that you’re playing against a cpu and have to guess the word in less tries, meaning that you lose if the cpu guesses the word in less tries. 
 
