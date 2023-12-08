@@ -41,6 +41,8 @@ checks_data = []   # List to store history of checks
 start_time = 0
 name = ""
 
+# Get the word list using the get_word_list function
+word_list = get_word_list()
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
@@ -50,14 +52,14 @@ def index():
         return redirect(url_for('wordle', name=name))
     else:
         # Fetch game results from the database
-        cursor.execute('SELECT player_name, elapsed_time FROM game_results ORDER BY elapsed_time ASC')
+        cursor.execute('SELECT player_name, elapsed_time FROM game_results ORDER BY elapsed_time ASC LIMIT 15')
         game_results = cursor.fetchall()
         return render_template('index.html', game_results=game_results)
 
 
 @app.route('/wordle', methods=['GET', 'POST'])
 def wordle():
-    global secret, guesses_data, checks_data, start_time, name
+    global secret, guesses_data, checks_data, start_time, name, word_list
 
     if request.method == 'POST':
         # Extract the start_time from the form
@@ -74,9 +76,14 @@ def wordle():
             start_time = time.time()
 
         # Extract guesses
-        if request.form.get('guess') is not None:
-            guess = request.form.get('guess').upper()  # Assuming only one guess is submitted
-
+        guess = "JAMES"
+        
+        if 'guess' in request.form and request.form['guess']:
+            guess = request.form['guess'].upper()
+        if guess not in word_list:
+            return render_template('wordle.html', rounds={'guesses': guesses_data, 'checks': checks_data, 'name': name, 'secret': secret, 'time': start_time})
+        
+        else:
             # Backend logic to create check data
             checks = create_check_data(secret, guess)
 
@@ -106,9 +113,7 @@ def wordle():
                 start_time = 0
                 return render_template('game_over.html', message=lost_message)
 
-    return render_template('wordle.html',
-                           rounds={'guesses': guesses_data, 'checks': checks_data, 'name': name, 'secret': secret,
-                                   'time': start_time})
+    return render_template('wordle.html', rounds={'guesses': guesses_data, 'checks': checks_data, 'name': name, 'secret': secret,'time': start_time})
 
 
 def create_check_data(secret, guess):

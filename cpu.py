@@ -9,7 +9,7 @@ def cpu_guess(possible_words):
 def match_feedback(word, guess, feedback):
     return feedback == get_feedback(word, guess)
 
-# Returns whether or not letter of each index in guess matches with secret word
+# Returns whether or not letter of each index in gue ss matches with secret word
 def get_feedback(secretWord, guess):
     feedback = ""
 
@@ -35,14 +35,14 @@ def cpu_wordle(secretWord):
     # find how to import secret_word from app.py or transfer this logic there 
 
     # Chooses random word, forms a list of possible words, and tracks tries
-    #secretWord = random.choice(get_word_list()), to delete... in case does not work
     possible_words = get_word_list()
-    max_tries = 5
-    tries = 0
+    max_tries = 6
+    tries = 1
 
     # While cpu still has tries, keep guessing, to change when implementing into front-end (print statements)
     while tries < max_tries:
         guess = cpu_guess(possible_words)
+        print(guess)
         feedback = get_feedback(secretWord,guess)
 
         if feedback == "11111":
