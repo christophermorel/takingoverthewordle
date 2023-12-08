@@ -44,6 +44,7 @@ name = ""
 # Get the word list using the get_word_list function
 word_list = get_word_list()
 
+# Index route
 @app.route('/', methods=['GET', 'POST'])
 def index():
     global start_time, name
